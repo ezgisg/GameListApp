@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PageCollectionViewCell" customModule="GameListApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="213" height="86"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="213" height="86"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ini-eE-Fka">
+                        <rect key="frame" x="5" y="5" width="203" height="76"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="0.97647058819999999" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ini-eE-Fka" secondAttribute="trailing" constant="5" id="8t8-Qe-eS3"/>
+                <constraint firstItem="Ini-eE-Fka" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="NG5-xf-t7N"/>
+                <constraint firstItem="Ini-eE-Fka" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="PEf-0o-1lT"/>
+                <constraint firstAttribute="bottom" secondItem="Ini-eE-Fka" secondAttribute="bottom" constant="5" id="QzV-pr-eha"/>
+            </constraints>
+            <size key="customSize" width="213" height="86"/>
+            <connections>
+                <outlet property="bannerImage" destination="Ini-eE-Fka" id="oVU-C8-Rdx"/>
+            </connections>
+            <point key="canvasLocation" x="-30" y="-8"/>
+        </collectionViewCell>
+    </objects>
+</document>
