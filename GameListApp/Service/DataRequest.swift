@@ -56,7 +56,7 @@ struct DataService {
         guard let url = URL(string: "https://api.rawg.io/api/games/\(id)?key=\(key)") else {
             return
         }
-        _ = URLSession.shared.dataTask(with: url) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
                 return
@@ -65,14 +65,17 @@ struct DataService {
             do {
                 let decoder = JSONDecoder()
                 let gameDetail = try decoder.decode(GameDetail.self, from: jsonData)
-                completion(.success(gameDetail))
+                DispatchQueue.main.async {
+                    completion(.success(gameDetail))
+                }
+        
             } catch {
                 completion(.failure(.canNotProcessData))
                 let errorMessage = "\(error.localizedDescription)"
                 print("Detay veride hata oluştu", errorMessage)
             }
         }
-        
+        dataTask.resume()
     }
     
 }

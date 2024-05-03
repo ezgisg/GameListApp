@@ -28,6 +28,7 @@ class PageCollectionViewCell: UICollectionViewCell {
         } else {
             self.bannerImage.image = UIImage(named: "game_placeholder")
         }
+        
     }
     
 

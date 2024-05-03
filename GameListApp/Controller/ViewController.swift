@@ -7,16 +7,20 @@
 
 import UIKit
 
-class ViewController: UIViewController , UIScrollViewDelegate {
+
+class ViewController: UIViewController , UIScrollViewDelegate  {
+ 
+
 
     let gameRequest = DataService()
     var games: GameModel?
     var results = [GameResult]()
     var filteredResults = [GameResult]()
-    let bannerPageCount = 5
+    let bannerPageCount = 4
     var isFiltered = false
     var emptyView = UIView()
-    
+    var constraint = NSLayoutConstraint()
+
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerCollectionView: UICollectionView!
@@ -24,7 +28,8 @@ class ViewController: UIViewController , UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+  
+        constraint = collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
         collectionView.dataSource = self
         collectionView.delegate = self
         bannerCollectionView.dataSource = self
@@ -39,6 +44,7 @@ class ViewController: UIViewController , UIScrollViewDelegate {
                     self.collectionView.reloadData()
                     self.bannerCollectionView.reloadData()
                     self.pageControl.numberOfPages = self.bannerPageCount
+                    self.sendData()
                 }
             case .failure(let error):
                 print("Hata oldu", error.localizedDescription)
@@ -46,14 +52,28 @@ class ViewController: UIViewController , UIScrollViewDelegate {
             
         }
 
-        
+
+
         setCollectionViewLayout()
         setupBannerCollectionView()
         self.collectionView.register(UINib(nibName: "gamesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "gamesCollectionViewCell")
         self.bannerCollectionView.register(UINib(nibName: "PageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PageCollectionViewCell")
 
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+    
+    func sendData() {
+        if let navBar = self.tabBarController?.viewControllers?.last as? UINavigationController,
+           let mainVC = navBar.viewControllers.first as? FavoriteGamesViewController {
+            mainVC.wholeGames = results
+       
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == bannerCollectionView {
             let pageIndex = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
@@ -88,6 +108,8 @@ class ViewController: UIViewController , UIScrollViewDelegate {
         pageControl.alpha = 0.2
         pageControl.layer.cornerRadius = 5
         
+        searchBar.placeholder = "Search with at least 4 characters.."
+        
     }
     
 
@@ -96,6 +118,7 @@ class ViewController: UIViewController , UIScrollViewDelegate {
         layout.itemSize = CGSize(width: collectionView.frame.width, height: 100)
         layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
+        
 
     }
     
@@ -107,13 +130,14 @@ class ViewController: UIViewController , UIScrollViewDelegate {
         messageLabel.textAlignment = .center
         messageLabel.textColor = .gray
         messageLabel.sizeToFit()
-        messageLabel.frame = CGRect(x: 100, y: 600, width: 200, height: 30)
-//        messageLabel.center = emptyView.center
+        messageLabel.center = emptyView.center
 
         emptyView.addSubview(messageLabel)
         collectionView.backgroundView = emptyView
        
     }
+    
+    
     
     func removeEmptyView() {
         collectionView.backgroundView = nil
@@ -155,10 +179,36 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         }
          return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == self.collectionView {
+            if !(isFiltered) {
+                let id = String(games?.results?[indexPath.row].id ?? 0)
+                loadDetailView(withId: id)
+            } else {
+                let id = String(filteredResults[indexPath.row].id ?? 0)
+                loadDetailView(withId: id)
+            }
+    
+        }
+        
+    }
+    
+    func loadDetailView(withId id: String) {
+        let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        detailVC.gameId = id
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension ViewController: UISearchBarDelegate {
+  
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        bannerCollectionView.translatesAutoresizingMaskIntoConstraints = false
         if searchText.count > 3 {
             filteredResults = results.filter({ gameResult in
                 guard let bool = gameResult.name?.lowercased().contains(searchText.lowercased()) else {return false}
@@ -167,26 +217,31 @@ extension ViewController: UISearchBarDelegate {
             isFiltered = true
             bannerCollectionView.isHidden = true
             pageControl.isHidden = true
-            let constraint = collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
-            constraint.priority = UILayoutPriority(1000.0)
             constraint.isActive = true
+ 
             if filteredResults.count == 0 {
                 setupEmptyView()
             } else {
                 removeEmptyView()
             }
             collectionView.reloadData()
+ 
+        
+          
         } else {
             isFiltered = false
             removeEmptyView()
             collectionView.reloadData()
             bannerCollectionView.isHidden = false
             pageControl.isHidden = false
-            let constraint = collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor)
-            constraint.priority = .defaultLow
-
+            constraint.isActive = false
+          
+       
+      
         }
     }
+    
+
     
 }
 

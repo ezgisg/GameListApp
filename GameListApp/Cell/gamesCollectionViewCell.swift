@@ -13,6 +13,7 @@ class gamesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var gameNameLabel: UILabel!
     @IBOutlet weak var gameInfoLabel: UILabel!
+    var gameId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,7 +49,7 @@ class gamesCollectionViewCell: UICollectionViewCell {
         let releaseText = model[index].released ?? "-"
         self.gameNameLabel.text = model[index].name ?? "unknown"
         self.gameInfoLabel.text = "\(ratingText)  Released: \(releaseText)"
-
+        self.gameId = model[index].id
         if let imageUrlString = model[index].background_image,
            let imageUrl = URL(string: imageUrlString) {
             imageView.sd_setImage(with: imageUrl)

@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Game List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GameListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeVC" id="BYZ-38-t0r" customClass="ViewController" customModule="GameListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6r5-jv-4d4">
-                                <rect key="frame" x="0.0" y="309" width="393" height="460"/>
+                                <rect key="frame" x="0.0" y="353" width="393" height="416"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yni-Ab-tff">
                                     <size key="itemSize" width="128" height="128"/>
@@ -38,7 +38,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hbf-mN-oGe">
-                                <rect key="frame" x="0.0" y="103" width="393" height="206"/>
+                                <rect key="frame" x="0.0" y="147" width="393" height="206"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="206" id="Gmu-33-mPn"/>
@@ -61,13 +61,13 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RTr-4J-QXj">
-                                <rect key="frame" x="126.66666666666669" y="278" width="140" height="26"/>
+                                <rect key="frame" x="126.66666666666669" y="322" width="140" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="VBM-uE-pZy"/>
                                 </constraints>
                             </pageControl>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mAZ-Wz-Mlv">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7L7-LS-Ggc"/>
                                 </constraints>
@@ -94,8 +94,7 @@
                             <constraint firstItem="6r5-jv-4d4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ynV-X3-OjL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house.circle" catalog="system" id="rb5-In-9TK"/>
-                    <navigationItem key="navigationItem" title="Title" id="3sw-Cg-5Mq"/>
+                    <navigationItem key="navigationItem" title="Game List" id="3sw-Cg-5Mq"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bannerCollectionView" destination="hbf-mN-oGe" id="Wee-Ul-F3o"/>
@@ -106,43 +105,115 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936.64122137404581" y="-28.169014084507044"/>
+            <point key="canvasLocation" x="1863.3587786259541" y="-28.169014084507044"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="Iqe-MK-BOE">
             <objects>
-                <viewController id="8lr-mS-M0j" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="favoritesVC" id="8lr-mS-M0j" customClass="FavoriteGamesViewController" customModule="GameListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x86-bU-Gan">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F3M-v0-AgN">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rJE-ml-kEc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="gamesCollectionViewCell" id="PNY-NS-TUJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GdV-hP-8uB">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="wac-rV-wYn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="F3M-v0-AgN" firstAttribute="top" secondItem="wac-rV-wYn" secondAttribute="top" id="0l0-qZ-gHJ"/>
+                            <constraint firstItem="F3M-v0-AgN" firstAttribute="leading" secondItem="wac-rV-wYn" secondAttribute="leading" id="S8F-Hy-Tc7"/>
+                            <constraint firstItem="wac-rV-wYn" firstAttribute="trailing" secondItem="F3M-v0-AgN" secondAttribute="trailing" id="p47-J5-orP"/>
+                            <constraint firstItem="wac-rV-wYn" firstAttribute="bottom" secondItem="F3M-v0-AgN" secondAttribute="bottom" id="qf2-gv-XPz"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="suit.heart.fill" catalog="system" id="8Fn-Zo-YSo"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="4bh-W9-9As"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="F3M-v0-AgN" id="t1T-21-yQd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGK-8a-86P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847" y="-28"/>
+            <point key="canvasLocation" x="3700" y="-28.169014084507044"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7db-Gz-G3R">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PhK-7N-VQy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sGH-e8-XAR">
+                    <tabBar key="tabBar" alpha="0.90000000000000002" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sGH-e8-XAR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tabBarAppearance key="standardAppearance"/>
+                        <tabBarAppearance key="scrollEdgeAppearance"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="M4T-Uj-P3D"/>
-                        <segue destination="8lr-mS-M0j" kind="relationship" relationship="viewControllers" id="eSJ-Mg-luZ"/>
+                        <segue destination="rnL-SP-E4j" kind="relationship" relationship="viewControllers" id="M4T-Uj-P3D"/>
+                        <segue destination="QT6-7e-dC8" kind="relationship" relationship="viewControllers" id="eSJ-Mg-luZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdc-DD-TEI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9.9236641221374047" y="-28.169014084507044"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="GfU-vW-7TZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rnL-SP-E4j" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house.circle" catalog="system" id="rb5-In-9TK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EbI-eg-kvl">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="nCV-od-hos"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3BA-NQ-mj1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="936.64122137404581" y="-28.169014084507044"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="8Tc-Fb-h1y">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QT6-7e-dC8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="suit.heart.fill" catalog="system" id="8Fn-Zo-YSo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="td8-fy-CqC">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8lr-mS-M0j" kind="relationship" relationship="rootViewController" id="fQN-RW-wMW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2Q-8D-IvB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2773.2824427480914" y="-28.169014084507044"/>
         </scene>
     </scenes>
     <resources>
